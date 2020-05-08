@@ -13,13 +13,13 @@ process.argv.includes('-d')
   ? process.env.NODE_ENV = 'development'
   : process.env.NODE_ENV = 'production'
 
-RPC.register('594174908263694403')
+RPC.register('708411174575931505')
 const rpc = new RPC.Client({ transport: 'ipc' })
 
 const Music = new MusicHelper()
 const iTunes = new iTunesHelper()
 
-Sentry.init({ dsn: 'https://b253804ef8344b1abf767b7702f13da2@sentry.io/1499784' })
+//Sentry.init({ dsn: 'https://b253804ef8344b1abf767b7702f13da2@sentry.io/1499784' })
 
 const ready = async (): Promise<void> => {
   try {
@@ -44,7 +44,7 @@ const ready = async (): Promise<void> => {
       applicationVersion: app.getVersion()
     })
     if (await isOnline()) {
-      await rpc.login({ clientId: '594174908263694403' })
+      await rpc.login({ clientId: '708411174575931505' })
       tray()
       setInterval(update, 3000)
     } else {
@@ -75,7 +75,7 @@ const tray = (): void => {
       accelerator: 'Command+R',
       click: async () => {
         rpc.destroy()
-        await rpc.login({ clientId: '594174908263694403' }).catch(console.error)
+        await rpc.login({ clientId: '708411174575931505' }).catch(console.error)
         update()
       }
     },
@@ -98,17 +98,16 @@ const update = async (): Promise<void> => {
       return rpc.setActivity({
         state: artist,
         details: `Paused: ${title}`,
-        largeImageKey: 'am',
-        largeImageText: 'Presence by Adаm#2917',
-        smallImageKey: 'pause'
+        largeImageKey: 'apple_music',
+        largeImageText: '',
       })
     } else if (startTimestamp) {
       return rpc.setActivity({
         state: artist,
         details: title,
         startTimestamp: startTimestamp,
-        largeImageKey: 'am',
-        largeImageText: 'Presence by Adаm#2917'
+        largeImageKey: 'apple_music',
+        largeImageText: ''
       })
     }
   } catch (error) {
